@@ -1,10 +1,15 @@
+//Update the repo 
+// git add .
+// git commit -m “changes for v2”
+// git push origin main
+
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 
 import ErrorPage from "./error-page";
 import { action as destroyAction } from "./routes/destroy";
 import Root, { loader as rootLoader,action as rootAction, } from "./routes/root";
-import Index from "./routes/index";
+import Index from "./routes/home";
 import Contact, {
   loader as contactLoader,
   action as contactAction,

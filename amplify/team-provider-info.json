@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-routerapp-dev-28ff6-authRole",
+      "UnauthRoleArn": "arn:aws:iam::905418252898:role/amplify-routerapp-dev-28ff6-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::905418252898:role/amplify-routerapp-dev-28ff6-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-routerapp-dev-28ff6-deployment",
+      "UnauthRoleName": "amplify-routerapp-dev-28ff6-unauthRole",
+      "StackName": "amplify-routerapp-dev-28ff6",
+      "StackId": "arn:aws:cloudformation:eu-central-1:905418252898:stack/amplify-routerapp-dev-28ff6/214215c0-ff36-11ee-acfe-061898f55cef",
+      "AmplifyAppId": "dlwgr3g8rh6o7"
+    }
+  }
+}
