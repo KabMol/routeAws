@@ -10,6 +10,11 @@
       "StackName": "amplify-routerapp-dev-28ff6",
       "StackId": "arn:aws:cloudformation:eu-central-1:905418252898:stack/amplify-routerapp-dev-28ff6/214215c0-ff36-11ee-acfe-061898f55cef",
       "AmplifyAppId": "dlwgr3g8rh6o7"
+    },
+    "categories": {
+      "auth": {
+        "routerapp3ddcaeca": {}
+      }
     }
   }
 }

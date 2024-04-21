@@ -3,6 +3,8 @@
 // git commit -m “changes for v2”
 // git push origin main
 
+
+
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 
@@ -26,41 +28,63 @@ import EditContact,{
 }
  from "./routes/edit";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    loader: rootLoader,
-    action: rootAction,
-    errorElement: <ErrorPage />,
-    children: [
-      { index: true, element: <Index /> },
-      {
-        path: "contacts/:contactId",
-        element: <Contact />,
-        loader: contactLoader,
-        action: contactAction,
-      },
-      {
-        path: "contacts/:contactId/edit",
-        element: <EditContact />,
-        loader: contactLoader,
-        action: editAction,
-      },
-      {
-        path: "contacts/:contactId/destroy",
-        action: destroyAction,
-        errorElement: <div>Oops! There was an error.</div>,
-      },
-    ],
-  },
-]);
+import "@aws-amplify/ui-react/styles.css";
+import {
+  withAuthenticator,
+  Button,
+  Heading,
+  Image,
+  View,
+  Card,
+} from "@aws-amplify/ui-react";
+
+
+import { Amplify } from 'aws-amplify';
+import config from './aws-exports';
+Amplify.configure(config);
+
+const AppWithAuthenticator = withAuthenticator(() => {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Root />,
+      loader: rootLoader,
+      action: rootAction,
+      errorElement: <ErrorPage />,
+      children: [
+        { index: true, element: <Index /> },
+        {
+          path: "contacts/:contactId",
+          element: <Contact />,
+          loader: contactLoader,
+          action: contactAction,
+        },
+        {
+          path: "contacts/:contactId/edit",
+          element: <EditContact />,
+          loader: contactLoader,
+          action: editAction,
+        },
+        {
+          path: "contacts/:contactId/destroy",
+          action: destroyAction,
+          errorElement: <div>Oops! There was an error ohh .</div>,
+        },
+      ],
+    },
+  ]);
+
+  return (
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  );
+});
 
 
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+
+     <AppWithAuthenticator />
 );
