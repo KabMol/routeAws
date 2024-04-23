@@ -41,6 +41,7 @@ import {
 
 import { Amplify } from 'aws-amplify';
 import config from './aws-exports';
+import { signOut } from "aws-amplify/auth";
 Amplify.configure(config);
 
 const AppWithAuthenticator = withAuthenticator(() => {
@@ -77,6 +78,7 @@ const AppWithAuthenticator = withAuthenticator(() => {
   return (
     <React.StrictMode>
       <RouterProvider router={router} />
+      <Button onClick={signOut}>Sign Out</Button>
     </React.StrictMode>
   );
 });
@@ -85,6 +87,5 @@ const AppWithAuthenticator = withAuthenticator(() => {
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-
      <AppWithAuthenticator />
 );
