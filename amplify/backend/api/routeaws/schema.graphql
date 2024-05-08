@@ -1,0 +1,8 @@
+type Course @model @auth(rules: [ { allow: private } ] ){
+  id: ID!
+  name: String!
+  description: String
+  credits:Float!
+  courseCode:String!
+}
+

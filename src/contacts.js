@@ -1,7 +1,12 @@
 import localforage from "localforage";
 import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
-
+/////
+import { generateClient } from 'aws-amplify/api';
+const client = generateClient();
+import {listCourses} from './graphql/queries'
+import { useEffect, useState } from "react";
+////////////
 export async function getContacts(query) {
   await fakeNetwork(`getContacts:${query}`);
   let contacts = await localforage.getItem("contacts");
@@ -71,3 +76,30 @@ async function fakeNetwork(key) {
     setTimeout(res, Math.random() * 800);
   });
 }
+
+
+// const fetchCourses= async ()=>
+//   try {
+//      const courseData = await client.gra
+//   } catch (error) {
+    
+//   }
+
+// const [courses,setCourse]=useState([])
+
+// useEffect(()=>{
+
+//   fetchCourses();
+// },[]);
+
+//   async function fetchCourses() {
+//     try {
+//       const courseData = await client.graphql({ query: listCourses });
+//       const courseList = courseData.data.listNotes.items;
+//       setCourse(courseList);
+//       console.log('course data', courseList)
+//     } catch (error) {
+//       console.log("error on fetching course",error)
+//     }
+  
+//   }

@@ -3,6 +3,7 @@
 // git commit -m “changes for v2”
 // git push origin main
 
+// npm run dev 
 
 
 import * as React from "react";
@@ -45,6 +46,7 @@ import { signOut } from "aws-amplify/auth";
 Amplify.configure(config);
 
 const AppWithAuthenticator = withAuthenticator(() => {
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -78,7 +80,9 @@ const AppWithAuthenticator = withAuthenticator(() => {
   return (
     <React.StrictMode>
       <RouterProvider router={router} />
-      <Button onClick={signOut}>Sign Out</Button>
+      <div data-amplify-authenticator> {/* Add the attribute to wrap the sign-out button */}
+        {/* <Button onClick={signOut}>Sign Out</Button> */}
+      </div>
     </React.StrictMode>
   );
 });
@@ -89,3 +93,4 @@ const AppWithAuthenticator = withAuthenticator(() => {
 ReactDOM.createRoot(document.getElementById("root")).render(
      <AppWithAuthenticator />
 );
+

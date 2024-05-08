@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { getContacts,createContact } from "../contacts";
 import { useEffect } from "react";
+import { signOut } from "aws-amplify/auth";
 
 export async function action() {
   const contact = await createContact();
@@ -38,7 +39,8 @@ export default function Root() {
     return (
       <>
         <div id="sidebar">
-          <h1>React Router Courses </h1>
+          <h1>React Router Courses </h1>  {/* Comment out this section the have the button at the bottom */}
+          
           <div>
             <Form id="search-form" role="search">
               <input
@@ -104,6 +106,7 @@ export default function Root() {
             </p>
           )}
           </nav>
+          <button onClick={signOut}>Logout</button>
         </div>
         <div id="detail"
         className={
