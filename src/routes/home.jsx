@@ -1,11 +1,33 @@
 import { useState, useEffect } from 'react'; // Import useState and useEffect
 import { generateClient } from 'aws-amplify/api';
 const client = generateClient();
+import * as React from 'react';
 import {listCourses} from '../graphql/queries'
-
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Checkbox from '@mui/material/Checkbox';
+import IconButton from '@mui/material/IconButton';
+import CommentIcon from '@mui/icons-material/Comment';
 
 export default function Home() {
   const [courses, setCourses] = useState([]); // Initialize courses state
+  const [checked, setChecked] = React.useState([]);
+
+  const handleToggle = (value) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+  };
 
   useEffect(() => {
    
@@ -27,24 +49,46 @@ export default function Home() {
 
   return (
     <div>
-      {/* Display fetched courses here */}
-      {courses.length > 0 && (
-        <ul>
-          {courses.map((course) => (
-            <li key={course.id}> {/* Replace 'id' with your unique course identifier */}
-              {course.name} {/* Replace 'title' with your course title property */}
-            </li>
-          ))}
-        </ul>
-      )}
+  
+
       <p id="zero-state">
         This is a demo for React Router change.123
         <br />
         Check out{" "}
-        <a href="https://reactrouter.com">the docs at reactrouter.com</a>
-        .
+        <a href="https://reactrouter.com">the docs at reactrouter.com</a>.
       </p>
+      <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
+      {courses.map((course) => {
+        const labelId = `checkbox-list-label-${course.id}`;
+
+        return (
+          <ListItem
+            key={course.id}
+            secondaryAction={
+              <IconButton edsge="end" aria-label="comments">
+                <CommentIcon/>
+              </IconButton>
+            }
+            disablePadding
+          >
+            <ListItemButton role={undefined} onClick={handleToggle(course)} >
+              <ListItemIcon>
+                <Checkbox
+                  edge="start"
+                  checked={checked.indexOf(course) !== -1}
+                  tabIndex={-1}
+                  disableRipple
+                  inputProps={{ 'aria-labelledby': labelId }}
+                />
+              </ListItemIcon>
+              <ListItemText id={labelId} primary={course.name} />
+            </ListItemButton>
+          </ListItem>
+        );
+      })}
+    </List>
     </div>
+    
   );
 }
 // // {
@@ -133,3 +177,18 @@ export default function Home() {
 //     </List>
 //   );
 // }
+
+
+// ----------------------
+//     {/* Display fetched courses here */}
+
+//     {courses.length > 0 && (
+//       <ul>
+//         {courses.map((course) => (
+//           <li key={course.id}> {/* Replace 'id' with your unique course identifier */}
+//             {course.name} {/* Replace 'title' with your course title property */}
+//           </li>
+//         ))}
+//       </ul>
+//     )}
+//     -------------------

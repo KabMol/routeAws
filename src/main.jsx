@@ -77,6 +77,7 @@ const AppWithAuthenticator = withAuthenticator(() => {
     },
   ]);
 
+  
   return (
     <React.StrictMode>
       <RouterProvider router={router} />

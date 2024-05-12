@@ -7,6 +7,10 @@ import {
   redirect,
   useSubmit,
 } from "react-router-dom";
+
+
+import checkUserActivity from "../functions/timer";
+
 import { getContacts,createContact } from "../contacts";
 import { useEffect } from "react";
 import { signOut } from "aws-amplify/auth";
@@ -35,6 +39,16 @@ export default function Root() {
   useEffect(() => {
     document.getElementById("q").value = q;
   }, [q]);
+
+  const isActive = checkUserActivity();
+
+  // Handle user inactivity based on "isActive" state
+  if (!isActive) {
+    // Show an inactivity message, log out, or perform other actions
+    console.log("Naught rascal")
+    
+  }
+
 
     return (
       <>
@@ -114,6 +128,7 @@ export default function Root() {
         }
         >
         <Outlet />
+        
         </div>
       </>
     );
