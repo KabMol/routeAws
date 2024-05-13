@@ -61,7 +61,7 @@ export default function Root() {
                 id="q"
                 className={searching ? "loading" : ""}
                 aria-label="Search contacts"
-                placeholder="Search"
+                placeholder="Search-I"
                 type="search"
                 name="q"
                 defaultValue={q}

@@ -5,6 +5,8 @@ import {
     useNavigate,
 } from "react-router-dom";
 
+import DOMPurify from 'dompurify';
+
 import { updateContact } from "../contacts";
 
 export async function action({ request, params }) {
@@ -12,8 +14,11 @@ export async function action({ request, params }) {
     const firstName = formData.get("first");
     const lastName = formData.get("last");
     const updates = Object.fromEntries(formData);
-    updates.first; // "Some"
-    updates.last; 
+    for (const key in updates) {
+      updates[key] = DOMPurify.sanitize(updates[key]);
+    }
+    // updates.first; // "Some"
+    // updates.last; 
     await updateContact(params.contactId, updates);
     return redirect(`/contacts/${params.contactId}`);
   }
@@ -21,6 +26,7 @@ export async function action({ request, params }) {
 export default function EditContact() {
   const { contact } = useLoaderData();
   const navigate = useNavigate();
+  const sanitizedTwitter = DOMPurify.sanitize(contact?.twitter);
   return (
     <Form method="post" id="contact-form">
       <p>
@@ -45,8 +51,8 @@ export default function EditContact() {
         <input
           type="text"
           name="twitter"
-          placeholder="@jack"
-          defaultValue={contact?.twitter}
+          placeholder="@elon"
+          defaultValue={sanitizedTwitter}
         />
       </label>
       <label>
