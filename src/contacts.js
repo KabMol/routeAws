@@ -1,12 +1,44 @@
 import localforage from "localforage";
 import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
+import { getCurrentUser } from 'aws-amplify/auth';
 /////
 import { generateClient } from 'aws-amplify/api';
 const client = generateClient();
 import {listCourses} from './graphql/queries'
 import { useEffect, useState } from "react";
 ////////////
+import { getCourse } from './graphql/queries';
+
+
+export const fetchCourseDetails = async (courseId) => {
+  try {
+    const courseData = await client.graphql({
+      query: getCourse,
+      variables: { id: courseId },
+    });
+
+    return courseData.data.getCourse;
+  } catch (error) {
+    console.error(`Error fetching course details for ID ${courseId}:`, error);
+  }
+};
+
+
+
+
+export const fetchCurrentUser1 = async () => {
+  try {
+    const user = await getCurrentUser();
+    return user;
+  } catch (error) {
+    console.error("Error fetching current user:", error);
+    throw error; // Re-throw the error to handle it in the calling code
+  }
+};
+
+
+
 export async function getContacts(query) {
   await fakeNetwork(`getContacts:${query}`);
   let contacts = await localforage.getItem("contacts");

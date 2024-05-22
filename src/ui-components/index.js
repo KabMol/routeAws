@@ -6,4 +6,6 @@
 
 export { default as CourseCreateForm } from "./CourseCreateForm";
 export { default as CourseUpdateForm } from "./CourseUpdateForm";
+export { default as UserCreateForm } from "./UserCreateForm";
+export { default as UserUpdateForm } from "./UserUpdateForm";
 export { default as studioTheme } from "./studioTheme";

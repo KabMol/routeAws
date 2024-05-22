@@ -1,8 +1,22 @@
-type Course @model @auth(rules: [ { allow: private } ] ){
-  id: ID!
-  name: String!
-  description: String
-  credits:Float!
-  courseCode:String!
+type User @model @auth(rules: [{ allow: private }]) {
+  id: ID! @primaryKey
+  email: String!
+  enrollments: [Enrollment] @hasMany(indexName: "byUser", fields: ["id"])
 }
 
+type Course @model @auth(rules: [{ allow: private }]) {
+  id: ID! @primaryKey
+  name: String!
+  description: String
+  credits: Float!
+  courseCode: String!
+  enrollments: [Enrollment] @hasMany(indexName: "byCourse", fields: ["id"])
+}
+
+type Enrollment @model @auth(rules: [{ allow: private }]) {
+  id: ID! @primaryKey
+  userID: ID! @index(name: "byUser", sortKeyFields: ["courseID"])
+  courseID: ID! @index(name: "byCourse", sortKeyFields: ["userID"])
+  user: User @belongsTo(fields: ["userID"])
+  course: Course @belongsTo(fields: ["courseID"])
+}
