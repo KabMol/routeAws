@@ -590,7 +590,26 @@ export async function loader({ request }) {
 
   return { contacts, filteredCourses, q };
 }
-
+// export const fetchCourseUser = async (userID) => {
+//   try {
+//     const enrollments = await fetchEnrollmentsForCurrentUser(userID);
+//     const enrolledCourseDetails = await Promise.all(
+//       enrollments.map(async (enrollment) => {
+//         const courseDetails = await fetchCourseDetails(enrollment.courseID);
+//         return {
+//           ...enrollment,
+//           courseDetails,
+//         };
+//       })
+//     );
+//     console.log(enrolledCourseDetails);
+//     // setFilteredCourses(enrolledCourseDetails);
+//     return(enrolledCourseDetails);
+    
+//   } catch (error) {
+//     console.error("Error fetching enrollments:", error);
+//   }
+// };
 export default function Root() {
   const { contacts, filteredCourses, q } = useLoaderData();
   const navigation = useNavigation();
@@ -611,7 +630,7 @@ export default function Root() {
 
   useEffect(() => {
     if (currentUser) {
-      fetchCourseUser();
+      // fetchCourseUser(currentUser.id);
     }
   }, [currentUser]);
 
@@ -624,24 +643,7 @@ export default function Root() {
     }
   };
 
-  const fetchCourseUser = async () => {
-    try {
-      const enrollments = await fetchEnrollmentsForCurrentUser(currentUser.userId);
-      const enrolledCourseDetails = await Promise.all(
-        enrollments.map(async (enrollment) => {
-          const courseDetails = await fetchCourseDetails(enrollment.courseID);
-          return {
-            ...enrollment,
-            courseDetails,
-          };
-        })
-      );
-      setFilteredCourses(enrolledCourseDetails);
-      console.log(enrolledCourseDetails);
-    } catch (error) {
-      console.error("Error fetching enrollments:", error);
-    }
-  };
+
 
   const isActive = checkUserActivity();
   if (!isActive) {
