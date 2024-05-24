@@ -724,9 +724,9 @@ export default function Home() {
   return (
     <div>
       <p id="zero-state">
-        This is a demo for React Router.
+       For more information about the course 
         <br />
-        Check out <a href="https://reactrouter.com">the docs at reactrouter.com</a>.
+        Check out <a href="https://www.cs.up.ac.za/module_categories/honours/">University of Pretoria Computer Science</a>.
       </p>
       <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
         {courses.map((course) => {
