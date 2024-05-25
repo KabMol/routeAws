@@ -282,7 +282,7 @@ export default function Home() {
       const courseList = courseData.data.listCourses.items;
       setCourses(courseList);
     } catch (error) {
-      console.log("Error fetching courses:", error);
+      console.error("Error fetching courses:", error);
     }
   };
 
@@ -328,7 +328,7 @@ export default function Home() {
     );
 
     if (!notEnrolled.length) {
-      console.log("All selected courses are already enrolled.");
+      // console.log("All selected courses are already enrolled.");
       return;
     }
 
@@ -354,7 +354,7 @@ export default function Home() {
           },
         });
       }
-      console.log("Enrollment updated successfully");
+      // console.log("Enrollment updated successfully");
     } catch (error) {
       console.error("Error updating enrollment:", error);
     }

@@ -51,7 +51,7 @@ function checkUserActivity(){
         const expireTime=localStorage.getItem("expireTime")
 
         if (expireTime<Date.now()){
-            console.log("inactive");
+            // console.log("inactive");
             setActive(false);
             signOut();
         }
